@@ -1,4 +1,6 @@
 class Channel
+  attr_reader :mutex, :queue
+
   #
   # Creates a new channel.
   #
@@ -12,7 +14,7 @@ class Channel
   # Pushes +obj+ to the queue.
   #
   def push(obj)
-    @mutex.synchronize{
+    @mutex.synchronize do
       @queue.push obj
       begin
         t = @waiting.shift
@@ -20,7 +22,7 @@ class Channel
       rescue ThreadError
         retry
       end
-    }
+    end
   end
 
   #
@@ -30,8 +32,7 @@ class Channel
 
   #
   # Retrieves data from channel. If the channel is empty, the calling thread is
-  # suspended until data is pushed onto channel.  If +non_block+ is true, the
-  # thread isn't suspended, and an exception is raised.
+  # suspended until data is pushed onto channel.
   #
   def pop
     @mutex.synchronize do
@@ -107,6 +108,10 @@ class Channel
     @waiting.size
   end
 
+  #
+  # Method called only by selector to subscribe listeners, dont
+  # use it, unless you understand exactly what you're doing!
+  #
   def subscribe(selector)
     channel = self
     @mutex.synchronize do
@@ -129,10 +134,4 @@ class Channel
     end
   end
 
-  #
-  # Unubscribe all listeners and cleans wainting threads
-  #
-  # def cleanup
-  #   
-  # end
 end
