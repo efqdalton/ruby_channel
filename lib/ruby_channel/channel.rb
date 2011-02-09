@@ -68,8 +68,9 @@ class Channel
   #
   # Redirect signal to other channel
   #
-  def redirect_to(channel)
+  def redirect_to(channel, callback_method=nil, *args)
     value = self.pop
+    value.send(callback_method, *args) if callback_method
     yield value if block_given?
     channel << value
   end

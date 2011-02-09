@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.email       = ['dalthon@aluno.ita.br']
   s.homepage    = "http://rubygems.org/gems/ruby_channel"
   s.summary     = "A way to use channels in Ruby, inspired by Google's Go"
-  s.description = "A way to use channels in Ruby, inspired by Google's Go"
+  s.description = "A way to use channels in Ruby, inspired by Google's Go and Ilya Grigorik's gem 'agent'"
 
   s.required_rubygems_version = ">= 1.3.6"
   s.rubyforge_project         = "ruby_channel"
