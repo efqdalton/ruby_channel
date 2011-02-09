@@ -1,10 +1,7 @@
 require 'monitor'
 require 'thread'
 
-puts Dir.pwd
-puts $0
-puts __FILE__
-
-require 'ruby_channel/channel'
-require 'ruby_channel/selector'
-require 'ruby_channel/version'
+load 'ruby_channel/version.rb'
+gem_path = File.dirname __FILE__
+autoload :Channel,  File.join(gem_path, "ruby_channel/channel.rb")
+autoload :Selector, File.join(gem_path, "ruby_channel/selector.rb")
