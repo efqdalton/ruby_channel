@@ -14,6 +14,12 @@ class Selector
     Thread.new{ channel.subscribe(selector, block) }
   end
 
+  def timeout(value, &block)
+    timeout_channel = Channel.new
+    Thread.new{ sleep value; timeout_channel << :timeout }
+    listen timeout_channel, &block
+  end
+
   def select
     @mutex.synchronize do
       if waiting?
