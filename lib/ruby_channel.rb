@@ -6,7 +6,7 @@ require 'ruby_channel/selector.rb'
 require 'ruby_channel/version.rb'
 
 module RubyChannel
-  DEBUG = false
+  CHANNEL_DEBUG = false
 end
 
 module Kernel
