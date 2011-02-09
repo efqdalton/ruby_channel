@@ -1,5 +1,5 @@
 class Selector
-  attr_reader :waiting
+  attr_reader :waiting, :result
   alias waiting? waiting
 
   def initialize

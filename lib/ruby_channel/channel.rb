@@ -95,7 +95,7 @@ class Channel
           selector.mutex.synchronize do
             selector.update_result(channel, @queue.shift) if selector.waiting?
           end
-          return
+          return selector.result
         end
       end
     end
