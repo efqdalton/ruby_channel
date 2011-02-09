@@ -22,7 +22,7 @@ module Kernel
   end
 
   def select_channel
-    s = Selector.new
+    s = RubyChannel::Selector.new
     yield s
     s.select
   end
