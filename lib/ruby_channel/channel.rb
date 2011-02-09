@@ -68,7 +68,9 @@ class Channel
   # Redirect signal to other channel
   #
   def redirect_to(channel)
-    channel << self.pop
+    value = self.pop
+    yield value if block_given?
+    channel << value
   end
   alias >> redirect_to
 
