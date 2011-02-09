@@ -33,18 +33,35 @@ class Channel
   # suspended until data is pushed onto channel.  If +non_block+ is true, the
   # thread isn't suspended, and an exception is raised.
   #
-  def pop(non_block=false)
-    @mutex.synchronize{
+  def pop
+    @mutex.synchronize do
       loop do
         if @queue.empty?
-          raise ThreadError, "queue empty" if non_block
           @waiting.push Thread.current
           @mutex.sleep
         else
           return @queue.shift
         end
       end
-    }
+    end
+  end
+
+  #
+  # Retrieves data from channel like method +pop+, but if +non_block+ is true, the
+  # thread isn't suspended, and an exception is raised.
+  #
+  def pop!
+    @mutex.synchronize do
+      loop do
+        if @queue.empty?
+          raise ThreadError, "Empty Channel"
+          @waiting.push Thread.current
+          @mutex.sleep
+        else
+          return @queue.shift
+        end
+      end
+    end
   end
 
   #
