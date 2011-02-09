@@ -48,9 +48,12 @@ class Channel
   end
 
   #
-  # Alias of pop
+  # Redirect signal to other channel
   #
-  alias >> pop
+  def redirect_to(channel)
+    channel << self.pop
+  end
+  alias >> redirect_to
 
   #
   # Returns +true+ if the channel is empty.
