@@ -86,15 +86,21 @@ class Channel
   end
 
   def subscribe(selector)
+    channel = self
     @mutex.synchronize do
       loop do
+        return selector.result unless selector.waiting?
         if @queue.empty?
           @waiting.push Thread.current
           @mutex.sleep
         else
           selector.mutex.synchronize do
-            selector.update_result(channel, @queue.shift) if selector.waiting?
+            if selector.waiting?
+              result = selector.update_result(channel, @queue.shift)
+              yield result
+            end
           end
+          selector.release_result
           return selector.result
         end
       end

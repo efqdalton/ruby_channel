@@ -5,6 +5,10 @@ require 'ruby_channel/channel.rb'
 require 'ruby_channel/selector.rb'
 require 'ruby_channel/version.rb'
 
+module RubyChannel
+  DEBUG = false
+end
+
 module Kernel
   def go(*args)
     Thread.new do
