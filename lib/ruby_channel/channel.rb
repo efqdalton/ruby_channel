@@ -49,8 +49,8 @@ module RubyChannel
     end
 
     #
-    # Retrieves data from channel like method +pop+, but if +non_block+ is true, the
-    # thread isn't suspended, and an exception is raised.
+    # Retrieves data from channel like method +pop+, but if thread isn't suspended,
+    # and an exception is raised.
     #
     def pop!
       @mutex.synchronize do

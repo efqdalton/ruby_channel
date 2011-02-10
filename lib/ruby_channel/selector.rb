@@ -46,7 +46,7 @@ module RubyChannel
           @mutex.sleep
         end
       end
-      @threads.each{ |thread| thread.wakeup }
+      @threads.each{ |thread| thread.wakeup if thread.alive? }
       @threads.clear
       return @result
     end

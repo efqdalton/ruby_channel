@@ -1,3 +1,6 @@
 pkg/*
 *.gem
 .bundle
+doc
+doc/*
+drafts.rb
