@@ -1,7 +1,46 @@
+= Ruby Channel - The power of Go Channels in Ruby
+
 This is a simple library aimed to use channels in Ruby the same concept that channels in Google's Go.
 
-Missing tests and decent README? Read the very simple code!
 
-Shame on me!
+== Install
+
+  gem install ruby_channel
+
+
+== Usage
+
+This is the simplest example:
+
+  include RubyChannel
+
+  chan = Channel.new
+  chan << 'data'
+  chan.pop # => 'data'
+
+Now something more interesting:
+
+  include RubyChannel
+  chan = [Channel.new, Channel.new]
+
+  Thread.new{ chan[rand 2] << 'where data goes?' }
+
+  select_channel do |s|
+    s.listen(chan[0]){ |data| puts data; puts 'On channel zero!' }
+    s.listen(chan[1]){ |data| puts data; puts 'On channel one!' }
+  end
+
+
+== Documentation
+
+Look at http://rdoc.info/gems/ruby_channel
+
+
+== TODO
+
+* Tests (Shame on me!)
+
+
+== License
 
 MIT license... bla, bla, bla
