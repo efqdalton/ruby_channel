@@ -1,6 +1,6 @@
 = Ruby Channel - The power of Go Channels in Ruby
 
-This is a simple library aimed to use channels in Ruby the same concept that channels in Google's Go.
+This is a simple library aimed to use channels in Ruby using the same concept that channels in Google's Go.
 
 
 == Install
