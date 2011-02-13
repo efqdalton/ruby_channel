@@ -67,6 +67,19 @@ module RubyChannel
     end
 
     #
+    # Retrieves all data from channel. If the channel is empty, the calling thread is
+    # suspended until data is pushed onto channel.
+    #
+    def flush
+      flushed_queue = nil
+      @mutex.synchronize do
+        flushed_queue = @queue.dup
+        @queue.clear
+      end
+      return flushed_queue
+    end
+
+    #
     # Redirect signal to other channel
     #
     def redirect_to(channel, callback_method=nil, *args)
